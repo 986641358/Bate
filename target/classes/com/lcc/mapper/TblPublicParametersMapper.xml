@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lcc.mapper.TblPublicParametersMapper" >
+  <resultMap id="BaseResultMap" type="com.lcc.pojo.TblPublicParameters" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="testUrl" property="testurl" jdbcType="VARCHAR" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="xinyitoken" property="xinyitoken" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="secret" property="secret" jdbcType="VARCHAR" />
+    <result column="staticSecret" property="staticsecret" jdbcType="VARCHAR" />
+    <result column="unidcode" property="unidcode" jdbcType="VARCHAR" />
+    <result column="userkey" property="userkey" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="utime" property="utime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, testUrl, appid, xinyitoken, version, secret, staticSecret, unidcode, userkey, 
+    ctime, utime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcc.pojo.TblPublicParametersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_public_parameters
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_public_parameters
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_public_parameters
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lcc.pojo.TblPublicParametersExample" >
+    delete from tbl_public_parameters
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lcc.pojo.TblPublicParameters" >
+    insert into tbl_public_parameters (id, testUrl, appid, 
+      xinyitoken, version, secret, 
+      staticSecret, unidcode, userkey, 
+      ctime, utime)
+    values (#{id,jdbcType=INTEGER}, #{testurl,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, 
+      #{xinyitoken,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{secret,jdbcType=VARCHAR}, 
+      #{staticsecret,jdbcType=VARCHAR}, #{unidcode,jdbcType=VARCHAR}, #{userkey,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcc.pojo.TblPublicParameters" >
+    insert into tbl_public_parameters
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="testurl != null" >
+        testUrl,
+      </if>
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="xinyitoken != null" >
+        xinyitoken,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="secret != null" >
+        secret,
+      </if>
+      <if test="staticsecret != null" >
+        staticSecret,
+      </if>
+      <if test="unidcode != null" >
+        unidcode,
+      </if>
+      <if test="userkey != null" >
+        userkey,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="utime != null" >
+        utime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testurl != null" >
+        #{testurl,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="xinyitoken != null" >
+        #{xinyitoken,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="staticsecret != null" >
+        #{staticsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="unidcode != null" >
+        #{unidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="userkey != null" >
+        #{userkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lcc.pojo.TblPublicParametersExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_public_parameters
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_public_parameters
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.testurl != null" >
+        testUrl = #{record.testurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appid != null" >
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xinyitoken != null" >
+        xinyitoken = #{record.xinyitoken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secret != null" >
+        secret = #{record.secret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staticsecret != null" >
+        staticSecret = #{record.staticsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unidcode != null" >
+        unidcode = #{record.unidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userkey != null" >
+        userkey = #{record.userkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.utime != null" >
+        utime = #{record.utime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_public_parameters
+    set id = #{record.id,jdbcType=INTEGER},
+      testUrl = #{record.testurl,jdbcType=VARCHAR},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      xinyitoken = #{record.xinyitoken,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      secret = #{record.secret,jdbcType=VARCHAR},
+      staticSecret = #{record.staticsecret,jdbcType=VARCHAR},
+      unidcode = #{record.unidcode,jdbcType=VARCHAR},
+      userkey = #{record.userkey,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      utime = #{record.utime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcc.pojo.TblPublicParameters" >
+    update tbl_public_parameters
+    <set >
+      <if test="testurl != null" >
+        testUrl = #{testurl,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="xinyitoken != null" >
+        xinyitoken = #{xinyitoken,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        secret = #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="staticsecret != null" >
+        staticSecret = #{staticsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="unidcode != null" >
+        unidcode = #{unidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="userkey != null" >
+        userkey = #{userkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        utime = #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcc.pojo.TblPublicParameters" >
+    update tbl_public_parameters
+    set testUrl = #{testurl,jdbcType=VARCHAR},
+      appid = #{appid,jdbcType=VARCHAR},
+      xinyitoken = #{xinyitoken,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      secret = #{secret,jdbcType=VARCHAR},
+      staticSecret = #{staticsecret,jdbcType=VARCHAR},
+      unidcode = #{unidcode,jdbcType=VARCHAR},
+      userkey = #{userkey,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      utime = #{utime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectTotal" resultType="java.lang.Long">
+  	select count(*) from tbl_public_parameters
+  </select>
+  <select id="selectByExamples" resultMap="BaseResultMap">
+   	select * from tbl_public_parameters limit #{page},#{limit}
+  </select>
+</mapper>

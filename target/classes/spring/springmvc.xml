@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation=
+	"
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.2.xsd 
+	">
+		
+	<!-- 配置包扫描器，扫描@Controller注解的类 --> 
+	<context:component-scan base-package="com.lcc.controller" />
+	
+	<!-- 配置任务扫描 -->
+	<task:annotation-driven />
+	
+	<!-- 配置注解驱动 -->
+    <mvc:annotation-driven>
+    	<!-- 处理请求返回json字符串的中文乱码问题 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+	<!-- 试图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 资源映射 -->
+	<mvc:resources location="/WEB-INF/layui/" mapping="/css/**"/>
+	<mvc:resources location="/WEB-INF/layui/" mapping="/font/**"/>
+	<mvc:resources location="/WEB-INF/layui/" mapping="/images/**/"/>
+	<mvc:resources location="/WEB-INF/layui/" mapping="/modules/**/"/>
+	<mvc:resources location="/WEB-INF/layui/" mapping="/layui/**"/>
+	<mvc:resources location="/WEB-INF/echarts/" mapping="/echarts/**"/>
+	<mvc:resources location="/WEB-INF/jsp/login1/" mapping="/login1/**"/>
+	<mvc:resources location="/WEB-INF/images/" mapping="/images/**"/>
+	
+	
+	
+	<!-- 定义文件上传解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880"></property>
+	</bean>
+	<!-- 拦截器配置 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/"/>
+			<mvc:exclude-mapping path="/login"/>
+			<bean class="com.taotao.intercept.LoginIntercept"/>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+</beans>

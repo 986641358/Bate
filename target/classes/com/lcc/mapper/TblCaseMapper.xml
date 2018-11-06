@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lcc.mapper.TblCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lcc.pojo.TblCase" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parameters" property="parameters" jdbcType="VARCHAR" />
+    <result column="apiid" property="apiid" jdbcType="INTEGER" />
+    <result column="casename" property="casename" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="isAdopt" property="isadopt" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="utime" property="utime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, parameters, apiid, casename, status, isAdopt, ctime, utime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcc.pojo.TblCaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_case
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_case
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lcc.pojo.TblCaseExample" >
+    delete from tbl_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lcc.pojo.TblCase" >
+    insert into tbl_case (id, parameters, apiid, 
+      casename, status, isAdopt, 
+      ctime, utime)
+    values (#{id,jdbcType=INTEGER}, #{parameters,jdbcType=VARCHAR}, #{apiid,jdbcType=INTEGER}, 
+      #{casename,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{isadopt,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcc.pojo.TblCase" >
+    insert into tbl_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parameters != null" >
+        parameters,
+      </if>
+      <if test="apiid != null" >
+        apiid,
+      </if>
+      <if test="casename != null" >
+        casename,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isadopt != null" >
+        isAdopt,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="utime != null" >
+        utime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parameters != null" >
+        #{parameters,jdbcType=VARCHAR},
+      </if>
+      <if test="apiid != null" >
+        #{apiid,jdbcType=INTEGER},
+      </if>
+      <if test="casename != null" >
+        #{casename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isadopt != null" >
+        #{isadopt,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lcc.pojo.TblCaseExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_case
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.parameters != null" >
+        parameters = #{record.parameters,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apiid != null" >
+        apiid = #{record.apiid,jdbcType=INTEGER},
+      </if>
+      <if test="record.casename != null" >
+        casename = #{record.casename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isadopt != null" >
+        isAdopt = #{record.isadopt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.utime != null" >
+        utime = #{record.utime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_case
+    set id = #{record.id,jdbcType=INTEGER},
+      parameters = #{record.parameters,jdbcType=VARCHAR},
+      apiid = #{record.apiid,jdbcType=INTEGER},
+      casename = #{record.casename,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      isAdopt = #{record.isadopt,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      utime = #{record.utime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcc.pojo.TblCase" >
+    update tbl_case
+    <set >
+      <if test="parameters != null" >
+        parameters = #{parameters,jdbcType=VARCHAR},
+      </if>
+      <if test="apiid != null" >
+        apiid = #{apiid,jdbcType=INTEGER},
+      </if>
+      <if test="casename != null" >
+        casename = #{casename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isadopt != null" >
+        isAdopt = #{isadopt,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        utime = #{utime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcc.pojo.TblCase" >
+    update tbl_case
+    set parameters = #{parameters,jdbcType=VARCHAR},
+      apiid = #{apiid,jdbcType=INTEGER},
+      casename = #{casename,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      isAdopt = #{isadopt,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      utime = #{utime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectTotal" resultType="java.lang.Long">
+  	select count(*) from tbl_case
+  </select>
+  <!-- 连表查询 -->
+  <select id="selectByExamples" resultMap="BaseResultMap" parameterType="com.lcc.pojo.TblCaseExample" >
+    select a.*,b.name,b.method from tbl_case a join tbl_api b on a.apiid = b.id;
+  </select>
+  <!-- 连表查询根据ID -->
+  <select id="selectByPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select a.*,b.name,b.method from tbl_case a join tbl_api b on a.apiid = b.id where a.id= #{id,jdbcType=INTEGER}
+  </select>
+</mapper>
